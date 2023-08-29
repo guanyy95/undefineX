@@ -10,7 +10,7 @@ public class SingletonAutoMono<T> : MonoBehaviour where T : MonoBehaviour
 
     public static T GetInstance()
     {
-        if( instance == null )
+        if (instance == null)
         {
             GameObject obj = new GameObject();
             //设置对象的名字为脚本名
@@ -20,7 +20,7 @@ public class SingletonAutoMono<T> : MonoBehaviour where T : MonoBehaviour
             DontDestroyOnLoad(obj);
             instance = obj.AddComponent<T>();
         }
+
         return instance;
     }
-
 }
