@@ -46,6 +46,7 @@ public class UnityEngine_CameraWrap
 		L.RegFunction("Render", Render);
 		L.RegFunction("RenderWithShader", RenderWithShader);
 		L.RegFunction("RenderDontRestore", RenderDontRestore);
+		L.RegFunction("SubmitRenderRequests", SubmitRenderRequests);
 		L.RegFunction("SetupCurrent", SetupCurrent);
 		L.RegFunction("CopyFrom", CopyFrom);
 		L.RegFunction("RemoveCommandBuffers", RemoveCommandBuffers);
@@ -121,6 +122,7 @@ public class UnityEngine_CameraWrap
 		L.RegVar("stereoActiveEye", get_stereoActiveEye, null);
 		L.RegVar("allCamerasCount", get_allCamerasCount, null);
 		L.RegVar("allCameras", get_allCameras, null);
+		L.RegVar("sceneViewFilterMode", get_sceneViewFilterMode, null);
 		L.RegVar("commandBufferCount", get_commandBufferCount, null);
 		L.RegFunction("CameraCallback", UnityEngine_Camera_CameraCallback);
 		L.EndClass();
@@ -1007,6 +1009,23 @@ public class UnityEngine_CameraWrap
 			ToLua.CheckArgsCount(L, 1);
 			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			obj.RenderDontRestore();
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int SubmitRenderRequests(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			System.Collections.Generic.List<UnityEngine.Camera.RenderRequest> arg0 = (System.Collections.Generic.List<UnityEngine.Camera.RenderRequest>)ToLua.CheckObject(L, 2, typeof(System.Collections.Generic.List<UnityEngine.Camera.RenderRequest>));
+			obj.SubmitRenderRequests(arg0);
 			return 0;
 		}
 		catch (Exception e)
@@ -2368,6 +2387,25 @@ public class UnityEngine_CameraWrap
 		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_sceneViewFilterMode(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			UnityEngine.Camera obj = (UnityEngine.Camera)o;
+			UnityEngine.Camera.SceneViewFilterMode ret = obj.sceneViewFilterMode;
+			ToLua.Push(L, ret);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index sceneViewFilterMode on a nil value");
 		}
 	}
 

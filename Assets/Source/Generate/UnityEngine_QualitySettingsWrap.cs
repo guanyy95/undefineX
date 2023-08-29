@@ -10,8 +10,10 @@ public class UnityEngine_QualitySettingsWrap
 		L.RegFunction("IncreaseLevel", IncreaseLevel);
 		L.RegFunction("DecreaseLevel", DecreaseLevel);
 		L.RegFunction("SetQualityLevel", SetQualityLevel);
+		L.RegFunction("SetLODSettings", SetLODSettings);
 		L.RegFunction("GetRenderPipelineAssetAt", GetRenderPipelineAssetAt);
 		L.RegFunction("GetQualityLevel", GetQualityLevel);
+		L.RegFunction("GetQualitySettings", GetQualitySettings);
 		L.RegFunction("__eq", op_Equality);
 		L.RegVar("pixelLightCount", get_pixelLightCount, set_pixelLightCount);
 		L.RegVar("shadows", get_shadows, set_shadows);
@@ -141,6 +143,39 @@ public class UnityEngine_QualitySettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int SetLODSettings(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+
+			if (count == 2)
+			{
+				float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
+				UnityEngine.QualitySettings.SetLODSettings(arg0, arg1);
+				return 0;
+			}
+			else if (count == 3)
+			{
+				float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
+				bool arg2 = LuaDLL.luaL_checkboolean(L, 3);
+				UnityEngine.QualitySettings.SetLODSettings(arg0, arg1, arg2);
+				return 0;
+			}
+			else
+			{
+				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.QualitySettings.SetLODSettings");
+			}
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetRenderPipelineAssetAt(IntPtr L)
 	{
 		try
@@ -165,6 +200,22 @@ public class UnityEngine_QualitySettingsWrap
 			ToLua.CheckArgsCount(L, 0);
 			int o = UnityEngine.QualitySettings.GetQualityLevel();
 			LuaDLL.lua_pushinteger(L, o);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int GetQualitySettings(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 0);
+			UnityEngine.Object o = UnityEngine.QualitySettings.GetQualitySettings();
+			ToLua.Push(L, o);
 			return 1;
 		}
 		catch (Exception e)
