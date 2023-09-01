@@ -1,19 +1,10 @@
-require("Test")
---主入口函数。从这里开始lua逻辑
-function Main()
-    print("Logic Start")
-end
+---
+--- Lua工具类
+--- Created by GYY
+--- DateTime: 2023/9/1 11:02
+---
 
---场景切换通知
-function OnLevelWasLoaded(level)
-    collectgarbage("collect")
-    Time.timeSinceLevelLoad = 0
-end
-
-function OnApplicationQuit()
-end
-
-local function Split(input, sepStr, maxSplit)
+function string.split(input, sepStr, maxSplit)
     if string.len(line) == 0 then
         return {}
     end
