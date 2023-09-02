@@ -4,6 +4,11 @@
 --- DateTime: 2023/9/1 10:58
 ---
 
+local ModuleTypeEnum = {
+    UTL = "Utility",
+    CTL = "Controller",
+    MDL = "Model",
+}
 local Modules = {}
 local Utilities = {}
 local Controllers = {}
@@ -18,7 +23,12 @@ local PriorityBootList = {
 }
 
 local ModuleList = {
+    "Mail",
 }
+
+local function GetModuleName(name, moduleTypeName)
+    if moduleTypeName == "UTL"
+end
 
 local function RegisterUtility(name)
     local result, utl = pcall(require, )

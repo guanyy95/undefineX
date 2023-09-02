@@ -9,8 +9,9 @@ end
 
 -- 初始化模块
 local function init()
-    Modules.PriorityBoot()
+    
 end
+
 
 -- 初始化全局定义
 local function globalDefine()
